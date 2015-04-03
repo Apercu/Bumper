@@ -15,7 +15,7 @@ angular.module('bumper')
         scope.login = function () {
           scope.nav.redirecting = true;
           $window.location.href = '/auth/github';
-        }
+        };
 
       }
     };

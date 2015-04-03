@@ -30,7 +30,6 @@ angular.module('bumper', [
 
       responseError: function (response) {
         if (response.status === 401) {
-          $location.path('/login');
           $cookieStore.remove('token');
           return $q.reject(response);
         }

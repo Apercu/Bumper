@@ -8,7 +8,8 @@ exports.setup = function (User) {
   passport.use(new GithubStrategy({
       clientID: config.githubId,
       clientSecret: config.githubSecret,
-      callbackURL: 'http://localhost:9000/auth/github/callback'
+      callbackURL: 'http://localhost:9000/auth/github/callback',
+      scope: ['public_repo']
     },
     function (accessToken, refreshToken, profile, done) {
       User.findOne({ githubId: profile.id }, function (err, user) {

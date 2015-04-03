@@ -16,46 +16,6 @@ angular.module('bumper')
     }
 
     /**
-     * Signup
-     *
-     * @param user
-     * @returns {promise}
-     */
-    this.signup = function (user) {
-      var deferred = $q.defer();
-      $http.post('/api/users', user)
-        .then(function (res) {
-          _user = res.data.user;
-          $cookieStore.put('token', res.data.token);
-          deferred.resolve();
-        })
-        .catch(function (err) {
-          deferred.reject(err.data);
-        });
-      return deferred.promise;
-    };
-
-    /**
-     * Login
-     *
-     * @param user
-     * @returns {promise}
-     */
-    this.login = function (user) {
-      var deferred = $q.defer();
-      $http.post('/auth/local', user)
-        .then(function (res) {
-          _user = res.data.user;
-          $cookieStore.put('token', res.data.token);
-          deferred.resolve();
-        })
-        .catch(function (err) {
-          deferred.reject(err.data);
-        });
-      return deferred.promise;
-    };
-
-    /**
      * Logout
      */
     this.logout = function () {
@@ -69,7 +29,7 @@ angular.module('bumper')
      * @returns {boolean}
      */
     this.isLogged = function () {
-      return _user.hasOwnProperty('email');
+      return _user.hasOwnProperty('_id');
     };
 
     /**

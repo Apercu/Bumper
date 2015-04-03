@@ -18,14 +18,19 @@ exports.setup = function (User) {
           user = new User({
             githubId: profile.id,
             username: profile.username,
-            avatar: profile.avatar_url
+            avatar: profile.avatar_url,
+            accessToken: accessToken
           });
           user.save(function (err) {
             if (err) { return done(err); }
             done(null, user);
           });
         } else {
-          done(null, user);
+          user.accessToken = accessToken;
+          user.save(function (err) {
+            if (err) { return done(err); }
+            done(null, user);
+          });
         }
       });
     }

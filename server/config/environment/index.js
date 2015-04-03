@@ -17,6 +17,9 @@ var all = {
     }
   },
 
+  githubId: '9722d93aa3e535810895',
+  githubSecret: process.env.GITHUB_SECRET,
+
   secrets: {
     session: process.env.SESSION_SECRET || 'secretKey'
   }

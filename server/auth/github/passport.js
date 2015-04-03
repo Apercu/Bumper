@@ -17,7 +17,8 @@ exports.setup = function (User) {
         if (!user) {
           user = new User({
             githubId: profile.id,
-            username: profile.username
+            username: profile.username,
+            avatar: profile.avatar_url
           });
           user.save(function (err) {
             if (err) { return done(err); }

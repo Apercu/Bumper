@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var github = require('../../github/github.service');
 
 function handleError (res, err) {
   return res.status(500).send(err);
@@ -20,5 +21,12 @@ exports.getMe = function (req, res) {
     if (err) { return handleError(res, err); }
     if (!user) { return res.json(401); }
     res.status(200).json(user);
+  });
+};
+
+exports.getGithubRepos = function (req, res) {
+  github.getRepos(req.user, {}, function (err, repos) {
+    if (err) { return handleError(res, err); }
+    res.status(200).json(repos);
   });
 };

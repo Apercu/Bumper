@@ -1,6 +1,7 @@
 .main-nav {
   background-color: #f5f5f5;
   max-height: 58px;
+  margin-bottom: 30px;
 }
 
 .main-nav--container {
@@ -15,7 +16,8 @@
   margin: 0;
   list-style-type: none;
   display: flex;
-  > li a {
+  align-items: center;
+  > li a:not(.btn) {
     display: block;
     padding: 20px 30px;
     text-decoration: none;

@@ -14,8 +14,8 @@
 
         <ul class="main-nav--items">
           <li ng-if="!Auth.isLogged()">
-            <a href="/login">
-              <i class="octicon octicon-key"></i>
+            <a ng-click="login()" ng-class="{ disabled: nav.redirecting }" class="btn btn-primary" role="button">
+              <i class="octicon octicon-mark-github"></i> login through github
             </a>
           </li>
           <li ng-if="Auth.isLogged()">

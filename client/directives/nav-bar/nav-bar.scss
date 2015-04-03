@@ -1,0 +1,31 @@
+.main-nav {
+  background-color: #f5f5f5;
+  max-height: 58px;
+}
+
+.main-nav--container {
+  display: flex;
+  > ul:last-child {
+    margin-left: auto;
+  }
+}
+
+.main-nav--items {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  > li a {
+    display: block;
+    padding: 20px 30px;
+    text-decoration: none;
+    color: black;
+  }
+  > li img {
+    max-height: 58px;
+  }
+}
+
+.main-nav--break {
+  flex: 1;
+}

@@ -4,7 +4,7 @@
 
     <base href="/">
 
-    <title>bumper</title>
+    <title>Bumper</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -14,6 +14,9 @@
     <!-- build:css app.css -->
 
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/Gridlock/fs.gridlock.css">
+    <link rel="stylesheet" href="bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="bower_components/primer-css/css/primer.css">
     <!-- endinject -->
 
     <!-- inject:css -->
@@ -23,13 +26,11 @@
     <!-- endbuild -->
 
   </head>
-  <body>
-
-    <strong>bumper</strong>
+  <body class="gridlock">
 
     <nav-bar></nav-bar>
 
-    <div ng-view></div>
+    <div ng-view class="row"></div>
 
     <!-- build:js app.js -->
 
@@ -48,8 +49,6 @@
     <script src="views/home/home.js"></script>
     <script src="views/login/login.controller.js"></script>
     <script src="views/login/login.js"></script>
-    <script src="views/signup/signup.controller.js"></script>
-    <script src="views/signup/signup.js"></script>
     <!-- endinject -->
 
     <!-- endbuild -->

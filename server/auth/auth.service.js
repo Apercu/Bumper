@@ -7,7 +7,7 @@ var compose = require('composable-middleware');
 var User = require('../api/user/user.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
 
-module.exports = {
+var auth = {
 
   /**
    * Attach the user object to the request if authenticated
@@ -35,8 +35,16 @@ module.exports = {
     return jwt.sign(
       { _id: id },
       config.secrets.session,
-      { expiresInMinutes: 60 * 5 }
+      { expiresInMinutes: 60 * 24 }
     );
+  },
+
+  setTokenCookie: function (req, res) {
+    var token = auth.signToken(req.user._id);
+    res.cookie('token', JSON.stringify(token));
+    res.redirect('/');
   }
 
 };
+
+module.exports = auth;

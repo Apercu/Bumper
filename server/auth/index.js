@@ -5,8 +5,8 @@ var router = express.Router();
 var config = require('../config/environment');
 var User = require('../api/user/user.model');
 
-require('./local/passport').setup(User, config);
+require('./github/passport').setup(User, config);
 
-router.use('/local', require('./local'));
+router.use('/github', require('./github'));
 
 module.exports = router;

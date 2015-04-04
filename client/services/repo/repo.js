@@ -52,12 +52,12 @@ angular.module('bumper')
       /**
        * Un-bumb a repo
        *
-       * @param repo
+       * @param repo or repo id
        * @returns {Promise}
        */
       remove: function (repo) {
         var def = $q.defer();
-        $http.delete('/api/repos/' + repo._id)
+        $http.delete('/api/repos/' + (repo._id || repo))
           .then(function () { def.resolve(); })
           .catch(function (err) { def.reject(err); });
         return def.promise;

@@ -7,20 +7,27 @@ angular.module('bumper')
 
     angular.extend(vm, {
 
+      ui: {
+        fetching: true
+      },
+
       githubRepos: [],
-      bumperRepos: [],
 
       addRepo: function (repo) {
         Repo.addFromGithub(repo)
-          .then(function (repo) {
-            vm.bumperRepos.push(repo);
+          .then(function (rep) {
+            repo.addedToBumper = true;
+            repo.bumperId = rep._id;
           })
           .catch(function (err) { console.log(err); });
       },
 
       removeRepo: function (repo) {
-        Repo.remove(repo)
-          .then(function () { vm.bumperRepos.splice(vm.bumperRepos.indexOf(repo), 1); })
+        Repo.remove(repo.bumperId)
+          .then(function () {
+            repo.addedToBumper = false;
+            repo.bumperId = null;
+          })
           .catch(function (err) { console.log(err); });
       }
 
@@ -28,10 +35,7 @@ angular.module('bumper')
 
     Repo.getGithubRepos()
       .then(function (repos) { vm.githubRepos = repos; })
-      .catch(function (err) { console.log(err); });
-
-    Repo.getBumperRepos()
-      .then(function (repos) { vm.bumperRepos = repos; })
-      .catch(function (err) { console.log(err); });
+      .catch(function (err) { console.log(err); })
+      .finally(function () { vm.ui.fetching = false; });
 
   });

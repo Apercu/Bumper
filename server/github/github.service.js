@@ -1,5 +1,6 @@
 'use strict';
 
+var Repo = require('../api/repo/repo.model.js');
 var GitHubApi = require('github');
 var async = require('async');
 var q = require('q');
@@ -48,7 +49,14 @@ var github = {
       github.getPackageDotJson(user, repo)
         .then(function () { repo.havePackage = true; })
         .catch(function () { repo.havePackage = false; })
-        .finally(done);
+        .finally(function () {
+          Repo.findOne({ 'infos.id': repo.id }, function (err, rep) {
+            if (err) { return done(err); }
+            repo.addedToBumper = !!rep;
+            repo.bumperId = !!rep ? rep._id : null;
+            done();
+          });
+        });
     }
 
     return def.promise;

@@ -8,28 +8,26 @@
     <div ng-repeat="repo in vm.githubRepos">
 
       <strong>{{ repo.name }}</strong>
+      <button ng-click="vm.addRepo(repo)" ng-show="repo.havePackage && !repo.addedToBumper">
+        add to bumber
+      </button>
+      <button ng-click="vm.removeRepo(repo)" ng-show="repo.addedToBumper">
+        remove from bumper
+      </button>
       <br/>
       have package : <strong>{{ repo.havePackage }}</strong>
-      <button ng-click="vm.addRepo(repo)" ng-if="repo.havePackage">
-        add to bumper
-      </button>
+      <br/>
+      added to bumper: <strong>{{ repo.addedToBumper }}</strong>
+      <br/>
+      bumper repo id: <strong>{{ repo.bumperId }}</strong>
       <br/>
       <br/>
-    </div>
-
-    <h2>your bumper repos:</h2>
-
-    <div ng-repeat="repo in vm.bumperRepos">
-      {{ repo.infos.name }}
-      <button ng-click="vm.removeRepo(repo)">
-        remove
-      </button>
     </div>
 
   </div>
 </div>
 
-<div class="overlay">
+<div class="overlay" ng-if="vm.ui.fetching">
   <div>
     <i class="octicon octicon-sync"></i> Fetching your repositories...
   </div>

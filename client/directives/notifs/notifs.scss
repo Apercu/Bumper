@@ -13,3 +13,29 @@ notifs > .row > div {
     margin-left: 10px;
   }
 }
+
+.notif-flash {
+  padding: 15px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  color: #246;
+  background-color: #e2eef9;
+  border: solid 1px #bac6d3;
+  span.flash-close {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+
+.notif-flash.flash-warn {
+  color: #4c4a42;
+  background-color: #fff9ea;
+  border-color: #dfd8c2;
+}
+
+.notif-flash.flash-error {
+  color: #911;
+  background-color: #fcdede;
+  border-color: #d2b2b2;
+}

@@ -1,6 +1,6 @@
 'use strict';
 
-var github = require('../../github/github.service');
+var github = require('../../services/github.service');
 var Repo = require('./repo.model');
 var User = require('../user/user.model');
 var async = require('async');

@@ -1,7 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
-var github = require('../../github/github.service');
+var github = require('../../services/github.service');
 
 function handleError (res, err) {
   return res.status(500).send(err);

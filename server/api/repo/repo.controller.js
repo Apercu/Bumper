@@ -21,19 +21,25 @@ exports.index = function (req, res) {
 };
 
 exports.create = function (req, res) {
-  github.getPackageDotJson(req.user, req.body)
-    .then(function (packageDotJson) {
-      Repo.create({
-        infos: req.body,
-        user: req.user._id,
-        lastUpdate: new Date(),
-        pkg: packageDotJson
-      }, function (err, repo) {
-        if (err) { return handleError(res, err); }
-        res.status(200).json(repo);
-      });
-    })
-    .catch(function (err) { return handleError(res, err); });
+  Repo.find({ 'infos.id': req.body.id }, function (err, repos) {
+    if (err) { return handleError(res, err); }
+    if (repos.length) { return handleError(res, 'Repo already exists.'); }
+
+    github.getPackageDotJson(req.user, req.body)
+      .then(function (packageDotJson) {
+        Repo.create({
+          infos: req.body,
+          user: req.user._id,
+          lastUpdate: new Date(),
+          pkg: packageDotJson
+        }, function (err, repo) {
+          if (err) { return handleError(res, err); }
+          res.status(200).json(repo);
+        });
+      })
+      .catch(function (err) { return handleError(res, err); });
+
+  });
 };
 
 exports.destroy = function (req, res) {

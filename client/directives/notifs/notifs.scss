@@ -1,0 +1,9 @@
+notifs > .row > div {
+  position: relative;
+}
+
+.notifs-container {
+  position: absolute;
+  right: 0;
+  z-index: 10;
+}

@@ -1,3 +1,13 @@
-<div>
-  {{ vm.name }}
+<div class="row">
+  <div class="all-full">
+
+    <div ng-if="!vm.repos.length" class="flash flash-warn">
+      You don't have any bumper repo activated, do you want to <a href="/add">add one</a> ?
+    </div>
+
+    <div ng-repeat="repo in vm.repos">
+      {{ repo }}
+    </div>
+
+  </div>
 </div>

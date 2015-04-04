@@ -9,7 +9,7 @@ angular.module('bumper')
         controllerAs: 'vm',
         authenticate: true,
         resolve: {
-          repos: function (Repo) {
+          bumperRepos: function (Repo) {
             return Repo.getBumperRepos();
           }
         }

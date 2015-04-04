@@ -14,7 +14,7 @@
 
         <ul class="main-nav--items">
           <li ng-if="Auth.isLogged()">
-            <img src="https://avatars0.githubusercontent.com/u/6033345?v=3&s=460">
+            <img ng-src="{{ Auth.getUser().avatar }}">
           </li>
           <li ng-if="Auth.isLogged()">
             <a href="#" ng-click="Auth.logout()">

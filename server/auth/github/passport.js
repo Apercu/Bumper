@@ -18,7 +18,7 @@ exports.setup = function (User) {
           user = new User({
             githubId: profile.id,
             username: profile.username,
-            avatar: profile.avatar_url,
+            avatar: profile._json.avatar_url,
             accessToken: accessToken
           });
         } else {

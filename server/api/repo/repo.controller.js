@@ -1,11 +1,10 @@
 'use strict';
 
-var _ = require('lodash');
 var github = require('../../github/github.service');
 var Repo = require('./repo.model');
 
 function handleError (res, err) {
-  return res.status(500).send(err);
+  return res.status(err.code || 500).send(err.message || err);
 }
 
 /**
@@ -15,8 +14,16 @@ function handleError (res, err) {
  * @param res
  */
 exports.index = function (req, res) {
-  github.getRepos(req.user, {}, function (err, repos) {
+  Repo.find({ user: req.user._id }, function (err, repos) {
     if (err) { return handleError(res, err); }
     res.status(200).json(repos);
   });
+};
+
+exports.create = function (req, res) {
+  github.getPackageDotJson(req.user, req.body)
+    .then(function (packageDotJson) {
+      res.status(200).json(packageDotJson);
+    })
+    .catch(function (err) { return handleError(res, err); });
 };

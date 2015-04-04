@@ -97,6 +97,11 @@ function simplifyGhRepo (r) {
   return {
     id: r.id,
     name: r.name,
-    owner: r.owner.login
+    owner: r.owner.login,
+    description: r.description,
+    isFork: r.fork,
+    url: r.url,
+    stars: r.stargazers_count,
+    forks: r.forks_count
   };
 }

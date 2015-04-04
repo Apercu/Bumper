@@ -40,6 +40,7 @@ var github = {
         repos = repos.map(simplifyGhRepo);
         async.each(repos, enrichGithubRepo, function (err) {
           if (err) { return def.reject(err); }
+          repos = repos.filter(function (r) { return r.havePackage; });
           def.resolve(repos);
         });
       });
@@ -49,6 +50,7 @@ var github = {
         .then(function () { repo.havePackage = true; })
         .catch(function () { repo.havePackage = false; })
         .finally(function () {
+          if (!repo.havePackage) { return done(); }
           Repo.findOne({ 'infos.id': repo.id }, function (err, rep) {
             if (err) { return done(err); }
             repo.addedToBumper = !!rep;

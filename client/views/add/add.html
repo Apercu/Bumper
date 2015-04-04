@@ -1,11 +1,7 @@
 <div class="row">
   <div class="all-full">
 
-    <div ng-if="!vm.githubRepos.length" class="flash flash-warn">
-      You don't have any github repository.
-    </div>
-
-    <button ng-click="vm.fetch()" class="btn-big" ng-class="{ 'btn-big-active': vm.ui.loading }">
+    <button ng-click="vm.fetch()" class="btn-big" ng-class="{ 'btn-big-active': vm.ui.fetching }">
       <span class="mega-octicon octicon-sync"></span>
       <span>Fetch Github</span>
     </button>
@@ -37,7 +33,7 @@
   </div>
 </div>
 
-<div class="overlay" ng-show="vm.ui.fetching">
+<div class="overlay" ng-show="vm.ui.loading">
   <div>
     <i class="octicon octicon-sync"></i> <span>Fetching your repositories...</span>
   </div>

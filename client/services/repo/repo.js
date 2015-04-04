@@ -37,13 +37,26 @@ angular.module('bumper')
       },
 
       /**
-       * Retrieve all github repos of user
+       * Retrieve github repos cached by our services
        *
        * @returns {Promise}
        */
       getGithubRepos: function () {
         var def = $q.defer();
         $http.get('/api/users/github-repos')
+          .then(function (res) { def.resolve(res.data); })
+          .catch(function (err) { def.reject(err.data); });
+        return def.promise;
+      },
+
+      /**
+       * Retrieve all github repos of user
+       *
+       * @returns {Promise}
+       */
+      fetchGithubRepos: function () {
+        var def = $q.defer();
+        $http.get('/api/users/fetch-github-repos')
           .then(function (res) { def.resolve(res.data); })
           .catch(function (err) { def.reject(err.data); });
         return def.promise;

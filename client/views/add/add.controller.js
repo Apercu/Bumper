@@ -8,22 +8,20 @@ angular.module('bumper')
     angular.extend(vm, {
 
       ui: {
-        fetching: true
+        fetching: false,
+        loading: true
       },
 
       githubRepos: [],
 
       fetch: function () {
 
-        vm.ui.loading = true;
+        vm.ui.fetching = true;
 
-        Repo.getGithubRepos()
+        Repo.fetchGithubRepos()
           .then(function (repos) { vm.githubRepos = repos; })
           .catch(function (err) { console.log(err); })
-          .finally(function () {
-            vm.ui.loading = false;
-            vm.ui.fetching = false;
-          });
+          .finally(function () { vm.ui.fetching = false; });
       },
 
       addRepo: function (repo) {
@@ -46,6 +44,9 @@ angular.module('bumper')
 
     });
 
-    this.fetch();
+    Repo.getGithubRepos()
+      .then(function (repos) { vm.githubRepos = repos; })
+      .catch(function (err) { console.log(err); })
+      .finally(function () { vm.ui.loading = false; });
 
   });

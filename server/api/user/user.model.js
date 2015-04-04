@@ -8,7 +8,11 @@ var UserSchema = new Schema({
   username: String,
   email: String,
   avatar: String,
-  accessToken: String
+  accessToken: String,
+  githubRepos: {
+    type: Array,
+    default: []
+  }
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,7 +1,9 @@
 'use strict';
 
 var GitHubApi = require('github');
+var async = require('async');
 var q = require('q');
+var Repo = require('../api/repo/repo.model.js');
 
 var github = {
 
@@ -33,10 +35,23 @@ var github = {
   getRepos: function (user) {
     var def = q.defer();
     this.getAuthenticatedApi(user)
-      .repos.getAll({ type: 'owner' }, function (err, data) {
+      .repos.getAll({ type: 'owner' }, function (err, repos) {
         if (err) { return def.reject(err); }
-        def.resolve(data.map(simplifyGhRepo));
+        repos = repos.map(simplifyGhRepo);
+        async.each(repos, enrichGithubRepo, function (err) {
+          if (err) { return def.reject(err); }
+          console.log(repos);
+          def.resolve(repos);
+        });
       });
+
+    function enrichGithubRepo (repo, done) {
+      github.getPackageDotJson(user, repo)
+        .then(function () { repo.havePackage = true; })
+        .catch(function () { repo.havePackage = false; })
+        .finally(done);
+    }
+
     return def.promise;
   },
 

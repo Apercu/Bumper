@@ -11,6 +11,8 @@ notifs > .row > div {
   }
   .notif-msg {
     margin-left: 10px;
+    max-width: 500px;
+    overflow: hidden;
   }
 }
 

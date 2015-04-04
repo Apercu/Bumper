@@ -2,6 +2,8 @@
 
 var github = require('../../github/github.service');
 var Repo = require('./repo.model');
+var async = require('async');
+var david = require('david');
 
 function handleError (res, err) {
   return res.status(err.code || 500).send(err.message || err);
@@ -14,9 +16,12 @@ function handleError (res, err) {
  * @param res
  */
 exports.index = function (req, res) {
-  Repo.find({ user: req.user._id }, function (err, repos) {
+  Repo.find({ user: req.user._id }).lean().exec(function (err, repos) {
     if (err) { return handleError(res, err); }
-    res.status(200).json(repos);
+    async.eachLimit(repos, 10, retrieveDependencies, function (err) {
+      if (err) { return handleError(res, err); }
+      res.status(200).json(repos);
+    });
   });
 };
 
@@ -53,3 +58,45 @@ exports.destroy = function (req, res) {
     });
   });
 };
+
+function listDependencies (deps) {
+  var out = [];
+  Object.keys(deps).forEach(function (depName) {
+    out.push({
+      name: depName,
+      required: deps[depName].required || '*',
+      stable: deps[depName].stable || 'None',
+      latest: deps[depName].latest
+    });
+  });
+  return out;
+}
+
+function retrieveDependencies (repo, done) {
+
+  var pkg = JSON.parse(repo.pkg);
+  delete repo.pkg;
+
+  async.parallel([
+
+    // get dependencies
+    function (done) {
+      david.getDependencies(pkg, function (err, deps) {
+        if (err) { return done(err); }
+        repo.deps = listDependencies(deps);
+        done();
+      });
+    },
+
+    // get dev-dependencies
+    function (done) {
+      david.getDependencies(pkg, { dev: true }, function (err, deps) {
+        if (err) { return done(err); }
+        repo.devDeps = listDependencies(deps);
+        done();
+      });
+    }
+
+  ], done);
+
+}

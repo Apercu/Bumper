@@ -6,7 +6,23 @@
     </div>
 
     <div ng-repeat="repo in vm.repos">
-      {{ repo }}
+
+
+      <strong>name: </strong> {{ repo.infos.name }}<br/>
+      <strong>deps:</strong><br/>
+      <ul>
+        <li ng-repeat="dep in repo.deps">
+          {{ dep | json }}
+        </li>
+      </ul>
+      <strong>dev deps:</strong><br/>
+      <ul>
+        <li ng-repeat="dep in repo.devDeps">
+          {{ dep | json }}
+        </li>
+      </ul>
+
+
     </div>
 
   </div>

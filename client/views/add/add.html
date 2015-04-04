@@ -11,15 +11,15 @@
       <br/>
       have package : <strong>{{ repo.havePackage }}</strong>
       <button ng-click="vm.addRepo(repo)" ng-if="repo.havePackage">
-        add to bumber
+        add to bumper
       </button>
       <br/>
       <br/>
     </div>
 
-    <h2>your bumber repos:</h2>
+    <h2>your bumper repos:</h2>
 
-    <div ng-repeat="repo in vm.bumberRepos">
+    <div ng-repeat="repo in vm.bumperRepos">
       {{ repo.infos.name }}
       <button ng-click="vm.removeRepo(repo)">
         remove

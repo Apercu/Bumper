@@ -8,19 +8,19 @@ angular.module('bumper')
     angular.extend(vm, {
 
       githubRepos: [],
-      bumberRepos: [],
+      bumperRepos: [],
 
       addRepo: function (repo) {
         Repo.addFromGithub(repo)
           .then(function (repo) {
-            vm.bumberRepos.push(repo);
+            vm.bumperRepos.push(repo);
           })
           .catch(function (err) { console.log(err); });
       },
 
       removeRepo: function (repo) {
         Repo.remove(repo)
-          .then(function () { vm.bumberRepos.splice(vm.bumberRepos.indexOf(repo), 1); })
+          .then(function () { vm.bumperRepos.splice(vm.bumperRepos.indexOf(repo), 1); })
           .catch(function (err) { console.log(err); });
       }
 
@@ -31,7 +31,7 @@ angular.module('bumper')
       .catch(function (err) { console.log(err); });
 
     Repo.getBumperRepos()
-      .then(function (repos) { vm.bumberRepos = repos; })
+      .then(function (repos) { vm.bumperRepos = repos; })
       .catch(function (err) { console.log(err); });
 
   });

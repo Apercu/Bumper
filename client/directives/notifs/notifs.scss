@@ -6,6 +6,9 @@ notifs > .row > div {
   position: absolute;
   right: 0;
   z-index: 11;
+  .notif {
+    margin-bottom: 10px;
+  }
   .notif-msg {
     margin-left: 10px;
   }

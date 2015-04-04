@@ -13,6 +13,7 @@
     "expect": true,
     "alert": true,
     "afterEach": true,
-    "beforeEach": true
+    "beforeEach": true,
+    "TimelineMax": true
   }
 }

@@ -5,5 +5,8 @@ notifs > .row > div {
 .notifs-container {
   position: absolute;
   right: 0;
-  z-index: 10;
+  z-index: 11;
+  .notif-msg {
+    margin-left: 10px;
+  }
 }

@@ -4,9 +4,10 @@
 
     <div class="notifs-container">
 
-      <div ng-repeat="notif in notifs" class="flash flash-with-icon {{ flashClass[notif.type] }}">
+      <div ng-repeat="notif in notifs" class="notif flash {{ flashClass[notif.type] }}">
         <i class="octicon {{ iconClass[notif.type] }}"></i>
-        {{ notif.msg }}
+        <span class="notif-msg">{{ notif.msg }}</span>
+        <span ng-click="remove(notif)" class="octicon octicon-x flash-close"></span>
       </div>
 
     </div>

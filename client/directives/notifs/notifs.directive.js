@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bumper')
-  .directive('notifs', function (Alert) {
+  .directive('notifs', function ($timeout, Alert) {
     return {
       restrict: 'EA',
       templateUrl: 'directives/notifs/notifs.html',
@@ -20,6 +20,22 @@ angular.module('bumper')
         };
 
         scope.notifs = Alert.get();
+
+        scope.remove = function (alert) {
+          Alert.remove(alert);
+        }
+
+        $timeout(function () {
+          Alert.add('Coucou');
+        }, 1000);
+
+        $timeout(function () {
+          Alert.add('Coucou', 'warning');
+        }, 2000);
+
+        $timeout(function () {
+          Alert.add('Coucou', 'error');
+        }, 3000);
 
       }
     };

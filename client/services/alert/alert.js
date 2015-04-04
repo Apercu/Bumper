@@ -14,7 +14,8 @@ angular.module('bumper')
        * @param type {String} ['warning', 'error', 'default']
        */
       add: function (msg, type) {
-        _alerts.push({ msg: msg, type: type || 'default' });
+        if (!msg) { return; }
+        _alerts.unshift({ msg: msg, type: type || 'default' });
       },
 
       /**
@@ -24,6 +25,15 @@ angular.module('bumper')
        */
       get: function () {
         return _alerts;
+      },
+
+      /**
+       * Remove the alert
+       *
+       * @param alert
+       */
+      remove: function (alert) {
+        _alerts.splice(_alerts.indexOf(alert), 1);
       }
 
     });

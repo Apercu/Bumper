@@ -4,7 +4,7 @@ angular.module('bumper')
   .animation('.overlay', function () {
     return {
 
-      leave: function (element, className, done) {
+      addClass: function (element, className, done) {
         var t = new TimelineMax();
 
         var loader = element[0].children[0];

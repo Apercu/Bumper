@@ -6,7 +6,10 @@ angular.module('bumper')
     var vm = this;
 
     angular.extend(vm, {
+      authenticating: false,
       login: function () {
+        if (vm.authenticating) { return; }
+        vm.authenticating = true;
         $window.location.href = '/auth/github';
       }
     });

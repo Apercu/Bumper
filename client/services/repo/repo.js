@@ -34,8 +34,21 @@ angular.module('bumper')
             def.reject(err.data);
           });
         return def.promise;
-      }
+      },
 
+      /**
+       * Un-bumb a repo
+       *
+       * @param repo
+       * @returns {Promise}
+       */
+      destroy: function (repo) {
+        var def = $q.defer();
+        $http.delete('/api/repos/' + repo._id)
+          .then(function () { def.resolve(); })
+          .catch(function (err) { def.reject(err); });
+        return def.promise;
+      }
 
     });
 

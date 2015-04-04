@@ -35,3 +35,15 @@ exports.create = function (req, res) {
     })
     .catch(function (err) { return handleError(res, err); });
 };
+
+exports.destroy = function (req, res) {
+  Repo.findOne({ _id: req.params.id }, function (err, repo) {
+    if (err) { return handleError(res, err); }
+    if (!repo) { return res.status(404).end(); }
+    if (String(repo.user) !== String(req.user._id)) { return res.status(401).end(); }
+    repo.remove(function (err) {
+      if (err) { return handleError(res, err); }
+      res.status(200).end();
+    });
+  });
+};

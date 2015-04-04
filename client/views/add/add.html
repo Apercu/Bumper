@@ -6,7 +6,24 @@
     </div>
 
     <div ng-repeat="repo in vm.githubRepos">
-      {{ repo }}
+
+      <strong>{{ repo.name }}</strong>
+      <br/>
+      have package : <strong>{{ repo.havePackage }}</strong>
+      <button ng-click="vm.addRepo(repo)" ng-if="repo.havePackage">
+        add to bumber
+      </button>
+      <br/>
+      <br/>
+    </div>
+
+    <h2>your bumber repos:</h2>
+
+    <div ng-repeat="repo in vm.bumberRepos">
+      {{ repo.infos.name }}
+      <button ng-click="vm.removeRepo(repo)">
+        remove
+      </button>
     </div>
 
   </div>

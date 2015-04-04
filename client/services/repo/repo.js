@@ -12,7 +12,7 @@ angular.module('bumper')
        * @param githubRepo
        * @returns {Promise}
        */
-      addGithubRepo: function (githubRepo) {
+      addFromGithub: function (githubRepo) {
         var def = $q.defer();
         $http.post('/api/repos', githubRepo)
           .then(function (res) { def.resolve(res.data); })
@@ -55,7 +55,7 @@ angular.module('bumper')
        * @param repo
        * @returns {Promise}
        */
-      destroy: function (repo) {
+      remove: function (repo) {
         var def = $q.defer();
         $http.delete('/api/repos/' + repo._id)
           .then(function () { def.resolve(); })

@@ -18,7 +18,24 @@ angular.module('bumper')
           .then(function (res) { def.resolve(res.data); })
           .catch(function (err) { def.reject(err.data); });
         return def.promise;
+      },
+
+      /**
+       * Retrieve all bumper repos of a user
+       *
+       * @returns {Promise}
+       */
+      gettBumperRepos: function () {
+        var def = $q.defer();
+        $http.get('/api/repos')
+          .then(function (res) {
+            def.resolve(res.data);
+          }, function (err) {
+            def.reject(err.data);
+          });
+        return def.promise;
       }
+
 
     });
 

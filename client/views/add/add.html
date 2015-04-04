@@ -5,6 +5,11 @@
       You don't have any github repository.
     </div>
 
+    <button ng-click="vm.fetch()" class="btn-big" ng-class="{ 'btn-big-active': vm.ui.loading }">
+      <span class="mega-octicon octicon-sync"></span>
+      <span>Fetch Github</span>
+    </button>
+
     <div ng-repeat="repo in vm.githubRepos | orderBy: ['-havePackage', 'name']">
 
       <a ng-href="https://github.com/{{ Auth.getUser().username }}/{{ repo.name }}" target="_blank">

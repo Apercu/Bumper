@@ -13,6 +13,19 @@ angular.module('bumper')
 
       githubRepos: [],
 
+      fetch: function () {
+
+        vm.ui.loading = true;
+
+        Repo.getGithubRepos()
+          .then(function (repos) { vm.githubRepos = repos; })
+          .catch(function (err) { console.log(err); })
+          .finally(function () {
+            vm.ui.loading = false;
+            vm.ui.fetching = false;
+          });
+      },
+
       addRepo: function (repo) {
         Repo.addFromGithub(repo)
           .then(function (rep) {
@@ -33,9 +46,6 @@ angular.module('bumper')
 
     });
 
-    Repo.getGithubRepos()
-      .then(function (repos) { vm.githubRepos = repos; })
-      .catch(function (err) { console.log(err); })
-      .finally(function () { vm.ui.fetching = false; });
+    this.fetch();
 
   });

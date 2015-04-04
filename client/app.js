@@ -41,8 +41,16 @@ angular.module('bumper', [
     };
   })
 
-  .run(function ($rootScope, Auth) {
+  .run(function ($rootScope, $http, Auth) {
 
     $rootScope.Auth = Auth;
+
+    $rootScope.rootUi = {
+      loading: true
+    };
+
+    $http.get('/api/users/me').finally(function () {
+      $rootScope.rootUi.loading = false;
+    });
 
   });

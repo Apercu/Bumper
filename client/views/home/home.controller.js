@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('bumper')
-  .controller('HomeCtrl', function () {
+  .controller('HomeCtrl', function (repos) {
 
     var vm = this;
 
     angular.extend(vm, {
-      name: 'HomeCtrl'
+      repos: repos
     });
 
   });

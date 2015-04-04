@@ -32,6 +32,13 @@
 
     <div ng-view class="row"></div>
 
+    <div ng-show="rootUi.loading" class="overlay">
+      <div>
+        <i class="mega-octicon octicon-sync"></i>
+        <h3> Loading... Please Wait.</h3>
+      </div>
+    </div>
+
     <!-- build:js app.js -->
 
     <!-- bower:js -->
@@ -39,10 +46,12 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/gsap/src/uncompressed/TweenMax.js"></script>
     <!-- endinject -->
 
     <!-- inject:js -->
     <script src="app.js"></script>
+    <script src="animations/overlay.js"></script>
     <script src="directives/nav-bar/nav-bar.directive.js"></script>
     <script src="services/auth/auth.js"></script>
     <script src="services/repo/repo.js"></script>

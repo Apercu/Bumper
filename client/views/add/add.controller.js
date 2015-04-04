@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bumper')
-  .controller('AddCtrl', function (Repo) {
+  .controller('AddCtrl', function (Repo, Alert) {
 
     var vm = this;
 
@@ -19,7 +19,7 @@ angular.module('bumper')
 
         Repo.fetchGithubRepos()
           .then(function (repos) { vm.githubRepos = repos; })
-          .catch(function (err) { console.log(err); })
+          .catch(function (err) { Alert.error(err); })
           .finally(function () { vm.ui.fetching = false; });
       },
 
@@ -30,7 +30,7 @@ angular.module('bumper')
             repo.addedToBumper = true;
             repo.bumperId = rep._id;
           })
-          .catch(function (err) { console.log(err); })
+          .catch(function (err) { Alert.error(err); })
           .finally(function () { repo.adding = false; });
       },
 
@@ -41,7 +41,7 @@ angular.module('bumper')
             repo.addedToBumper = false;
             repo.bumperId = null;
           })
-          .catch(function (err) { console.log(err); })
+          .catch(function (err) { Alert.error(err); })
           .finally(function () { repo.removing = false; });
       }
 
@@ -49,7 +49,7 @@ angular.module('bumper')
 
     Repo.getGithubRepos()
       .then(function (repos) { vm.githubRepos = repos; })
-      .catch(function (err) { console.log(err); })
+      .catch(function (err) { Alert.error(err); })
       .finally(function () { vm.ui.fetching = false; });
 
   });

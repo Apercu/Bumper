@@ -100,7 +100,7 @@ function simplifyGhRepo (r) {
     owner: r.owner.login,
     description: r.description,
     isFork: r.fork,
-    url: r.url,
+    url: r.html_url,
     stars: r.stargazers_count,
     forks: r.forks_count
   };

@@ -29,6 +29,11 @@ body {
   }
 }
 
+.sync-animate {
+  -webkit-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+}
+
 @keyframes rotating {
     from {
         transform: rotate(0deg);

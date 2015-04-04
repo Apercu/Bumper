@@ -20,12 +20,30 @@
             <em>{{ repo.description }}</em>
           </p>
 
-          <button ng-click="vm.addRepo(repo)" ng-show="repo.havePackage && !repo.addedToBumper" class="btn btn-primary">
-            <i class="octicon octicon-plus"></i> Add to bumper
+          <button
+            ng-click="vm.addRepo(repo)"
+            ng-show="repo.havePackage && !repo.addedToBumper"
+            ng-class="{ disabled: repo.adding }"
+            class="btn btn-primary">
+            <span ng-if="repo.adding">
+              <i class="octicon octicon-sync sync-animate"></i> Adding...
+            </span>
+            <span ng-if="!repo.adding">
+              <i class="octicon octicon-plus"></i> Add to bumper
+            </span>
           </button>
 
-          <button ng-click="vm.removeRepo(repo)" ng-show="repo.addedToBumper" class="btn btn-danger">
-            <i class="octicon octicon-x"></i> Remove from bumper
+          <button
+            ng-click="vm.removeRepo(repo)"
+            ng-show="repo.addedToBumper"
+            ng-class="{ disabled: repo.removing }"
+            class="btn btn-danger">
+            <span ng-if="repo.removing">
+              <i class="octicon octicon-sync sync-animate"></i> Removing...
+            </span>
+            <span ng-if="!repo.removing">
+              <i class="octicon octicon-x"></i> Remove from bumper
+            </span>
           </button>
         </div>
 

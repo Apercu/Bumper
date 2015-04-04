@@ -2,6 +2,18 @@
   background-color: #f5f5f5;
   max-height: 58px;
   margin-bottom: 30px;
+
+  transition: 250ms ease-out transform;
+  -webkit-transition: 250ms ease-out transform;
+
+  &.ng-hide-add, &.ng-hide-remove {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+  &.ng-hide {
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+  }
 }
 
 .main-nav--container {
@@ -26,8 +38,4 @@
   > li img {
     max-height: 58px;
   }
-}
-
-.main-nav--break {
-  flex: 1;
 }

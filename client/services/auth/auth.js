@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bumper')
-  .service('Auth', function ($rootScope, $cookieStore, $q, $http) {
+  .service('Auth', function ($rootScope, $cookieStore, $q, $http, $location) {
 
     var _user = {};
 
@@ -9,6 +9,9 @@ angular.module('bumper')
       $http.get('/api/users/me')
         .then(function (res) {
           _user = res.data;
+          if ($location.path() === '/') {
+            $location.path('/dashboard');
+          }
         })
         .catch(function (err) {
           console.log(err);
@@ -21,6 +24,7 @@ angular.module('bumper')
     this.logout = function () {
       $cookieStore.remove('token');
       _user = {};
+      $location.path('/');
     };
 
     /**
@@ -39,6 +43,21 @@ angular.module('bumper')
      */
     this.getUser = function () {
       return _user;
+    };
+
+    /**
+     * Make a call to get the current user
+     *
+     * @returns {Promise}
+     */
+    this.getMe = function () {
+      var deferred = $q.defer();
+      $http.get('/api/users/me').then(function (res) {
+        deferred.resolve(res.data);
+      }, function (err) {
+        deferred.reject(err.data);
+      });
+      return deferred.promise;
     };
 
   });

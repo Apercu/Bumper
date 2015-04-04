@@ -41,16 +41,24 @@ angular.module('bumper', [
     };
   })
 
-  .run(function ($rootScope, $http, Auth) {
+  .run(function ($rootScope, $location, Auth) {
 
     $rootScope.Auth = Auth;
 
     $rootScope.rootUi = {
-      loading: true
+      navBar: false
     };
 
-    $http.get('/api/users/me').finally(function () {
-      $rootScope.rootUi.loading = false;
+    $rootScope.$on('$routeChangeStart', function (event, next) {
+      if (next.authenticate) {
+        Auth.getMe().catch(function () {
+          $location.path('/');
+        });
+      }
+    });
+
+    $rootScope.$on('$routeChangeSuccess', function (e, route) {
+      $rootScope.rootUi.navBar = route.$$route.navBar === undefined;
     });
 
   });

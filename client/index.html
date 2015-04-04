@@ -28,16 +28,9 @@
   </head>
   <body class="gridlock">
 
-    <nav-bar></nav-bar>
+    <nav-bar ng-show="rootUi.navBar"></nav-bar>
 
     <div ng-view class="row"></div>
-
-    <div ng-show="rootUi.loading" class="overlay">
-      <div>
-        <i class="mega-octicon octicon-sync"></i>
-        <h3> Loading... Please Wait.</h3>
-      </div>
-    </div>
 
     <!-- build:js app.js -->
 
@@ -55,6 +48,8 @@
     <script src="directives/nav-bar/nav-bar.directive.js"></script>
     <script src="services/auth/auth.js"></script>
     <script src="services/repo/repo.js"></script>
+    <script src="views/dashboard/dashboard.controller.js"></script>
+    <script src="views/dashboard/dashboard.js"></script>
     <script src="views/home/home.controller.js"></script>
     <script src="views/home/home.js"></script>
     <!-- endinject -->

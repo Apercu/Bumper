@@ -1,6 +1,19 @@
 .main-title {
+  text-align: center;
   padding: 20px;
   margin-bottom: 30px;
+}
+
+.main-login {
   text-align: center;
-  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.home-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }

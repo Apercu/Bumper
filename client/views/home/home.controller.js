@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('bumper')
-  .controller('HomeCtrl', function (repos) {
+  .controller('HomeCtrl', function ($window) {
 
     var vm = this;
 
     angular.extend(vm, {
-      repos: repos
+      login: function () {
+        $window.location.href = '/auth/github';
+      }
     });
 
   });

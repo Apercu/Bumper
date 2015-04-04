@@ -8,24 +8,26 @@
 
     <div class="add-repos-list">
 
-      <div ng-repeat="repo in vm.githubRepos | orderBy: 'name'">
+      <div ng-repeat="repo in vm.githubRepos | orderBy: 'name'" class="add-repo">
 
-        <a ng-href="https://github.com/{{ Auth.getUser().username }}/{{ repo.name }}" target="_blank">
-          <h3><i class="octicon octicon-mark-github"></i> {{ repo.name }}</h3>
-        </a>
+        <div>
+          <a ng-href="https://github.com/{{ Auth.getUser().username }}/{{ repo.name }}" target="_blank">
+            <h3><i class="octicon octicon-mark-github"></i> {{ repo.name }}</h3>
+          </a>
 
-        <button ng-click="vm.addRepo(repo)" ng-show="repo.havePackage && !repo.addedToBumper" class="btn btn-primary">
-          <i class="octicon octicon-plus"></i> Add to bumper
-        </button>
+          <button ng-click="vm.addRepo(repo)" ng-show="repo.havePackage && !repo.addedToBumper" class="btn btn-primary">
+            <i class="octicon octicon-plus"></i> Add to bumper
+          </button>
 
-        <button ng-click="vm.removeRepo(repo)" ng-show="repo.addedToBumper" class="btn btn-danger">
-          <i class="octicon octicon-x"></i> Remove from bumper
-        </button>
+          <button ng-click="vm.removeRepo(repo)" ng-show="repo.addedToBumper" class="btn btn-danger">
+            <i class="octicon octicon-x"></i> Remove from bumper
+          </button>
+        </div>
 
-        <br/>
-        bumper repo id: <strong>{{ repo.bumperId }}</strong>
-        <br/>
-        <br/>
+        <div>
+          bumper repo id: <strong>{{ repo.bumperId }}</strong>
+        </div>
+
       </div>
 
     </div>

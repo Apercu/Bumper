@@ -23,7 +23,7 @@ angular.module('bumper')
 
         scope.remove = function (alert) {
           Alert.remove(alert);
-        }
+        };
 
         $timeout(function () {
           Alert.add('Coucou');
@@ -31,11 +31,11 @@ angular.module('bumper')
 
         $timeout(function () {
           Alert.add('Coucou', 'warning');
-        }, 2000);
+        }, 1100);
 
         $timeout(function () {
           Alert.add('Coucou', 'error');
-        }, 3000);
+        }, 2000);
 
       }
     };

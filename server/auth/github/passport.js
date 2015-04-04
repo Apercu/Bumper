@@ -21,17 +21,13 @@ exports.setup = function (User) {
             avatar: profile.avatar_url,
             accessToken: accessToken
           });
-          user.save(function (err) {
-            if (err) { return done(err); }
-            done(null, user);
-          });
         } else {
           user.accessToken = accessToken;
-          user.save(function (err) {
-            if (err) { return done(err); }
-            done(null, user);
-          });
         }
+        user.save(function (err) {
+          if (err) { return done(err); }
+          done(null, user);
+        });
       });
     }
   ));

@@ -1,8 +1,9 @@
 <div class="home-container">
 
   <div class="row">
-    <div class="all-fourth centered">
-      <h1 class="main-title">Bumper</h1>
+    <div class="all-fourth centered main-title">
+      <h1>Bumper</h1>
+      <em>Update your npm dependencies, easily.</em>
     </div>
   </div>
 
@@ -10,7 +11,7 @@
 
   <div class="row">
     <div class="all-fourth centered main-login">
-      <button ng-click="vm.login()" ng-class="{ 'btn-disabled': vm.authenticating }" class="btn btn-primary">
+      <button ng-click="vm.login()" ng-class="{ disabled: vm.authenticating }" class="btn btn-primary">
         <i class="octicon octicon-mark-github"></i> {{ vm.authenticating ? 'Login...' : 'Login through github' }}
       </button>
     </div>

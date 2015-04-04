@@ -71,12 +71,15 @@ exports.create = function (req, res) {
       repos[index].addedToBumper = true;
       repos[index].bumperId = repo._id;
       req.user.markModified('githubRepos');
-      req.user.save(done);
+      req.user.save(function (err) {
+        if (err) { return done(err); }
+        done(null, repo);
+      });
     }
 
-  ], function (err) {
+  ], function (err, repo) {
     if (err) { return handleError(res, err); }
-    res.status(201).end();
+    res.status(201).json(repo);
   });
 };
 

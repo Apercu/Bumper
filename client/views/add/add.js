@@ -6,6 +6,7 @@ angular.module('bumper')
       .when('/add', {
         templateUrl: 'views/add/add.html',
         controller: 'AddCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        authenticate: true
       });
   });

@@ -49,3 +49,9 @@
     margin-left: auto;
   }
 }
+
+.add-repo--extra {
+  span + span {
+    margin-left: 10px;
+  }
+}

@@ -7,7 +7,8 @@ var RepoSchema = new Schema({
   infos: Schema.Types.Mixed,
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   lastUpdate: Date,
-  pkg: String
+  pkg: String,
+  david: { type: Schema.Types.Mixed, default: {} }
 });
 
 module.exports = mongoose.model('Repo', RepoSchema);

@@ -8,9 +8,11 @@ angular.module('bumper')
 
         var t = new TimelineMax();
 
+        var h = element[0].clientHeight;
+
         t
-          .set(element, { y: -100, opacity: 0, ease: 'Back.easeIn' })
-          .to(element, 0.5, { y: 0, opacity: 1 })
+          .set(element, { height: 0, y: -100, opacity: 0, ease: 'Back.easeIn' })
+          .to(element, 0.5, { height: h, y: 0, opacity: 1 })
           .addCallback(done);
 
       },

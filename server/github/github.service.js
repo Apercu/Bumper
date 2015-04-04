@@ -40,7 +40,6 @@ var github = {
         repos = repos.map(simplifyGhRepo);
         async.each(repos, enrichGithubRepo, function (err) {
           if (err) { return def.reject(err); }
-          console.log(repos);
           def.resolve(repos);
         });
       });

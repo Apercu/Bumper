@@ -25,7 +25,7 @@ angular.module('bumper')
        *
        * @returns {Promise}
        */
-      gettBumperRepos: function () {
+      getBumperRepos: function () {
         var def = $q.defer();
         $http.get('/api/repos')
           .then(function (res) {

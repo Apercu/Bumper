@@ -17,7 +17,7 @@ angular.module('bumper', [
 
   })
   .factory('authInterceptor',
-  function ($rootScope, $q, $cookieStore, $location) {
+  function ($rootScope, $q, $cookieStore) {
     return {
 
       request: function (config) {

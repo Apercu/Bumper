@@ -1,4 +1,3 @@
-
 .btn-big {
   display: flex;
   align-items: center;
@@ -11,6 +10,10 @@
   outline: none;
   > * + * {
     margin-left: 10px;
+  }
+  > .mega-octicon {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
   }
 }
 
@@ -25,4 +28,8 @@
     -webkit-animation: rotating 2s linear infinite;
     animation: rotating 2s linear infinite;
   }
+}
+
+.add-repos-list {
+  margin-top: 30px;
 }

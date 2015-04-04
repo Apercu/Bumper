@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="all-full">
+
+    <div ng-if="!vm.githubRepos.length" class="flash flash-warn">
+      You don't have any github repository.
+    </div>
+
+    <div ng-repeat="repo in vm.githubRepos">
+      {{ repo }}
+    </div>
+
+  </div>
+</div>
+
+<div class="overlay">
+  <div>
+    <i class="octicon octicon-sync"></i> Fetching your repositories...
+  </div>
+</div>

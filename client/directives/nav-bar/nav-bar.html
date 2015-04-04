@@ -10,13 +10,18 @@
               <i class="octicon octicon-home"></i>
             </a>
           </li>
+          <li>
+            <a href="/add">
+              <i class="octicon octicon-plus"></i>
+            </a>
+          </li>
         </ul>
 
         <ul class="main-nav--items">
-          <li ng-if="Auth.isLogged()">
+          <li>
             <img ng-src="{{ Auth.getUser().avatar }}">
           </li>
-          <li ng-if="Auth.isLogged()">
+          <li>
             <a href="#" ng-click="Auth.logout()">
               <i class="octicon octicon-sign-out"></i>
             </a>

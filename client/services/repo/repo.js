@@ -38,6 +38,8 @@ angular.module('bumper')
 
       /**
        * Retrieve all github repos of user
+       *
+       * @returns {Promise}
        */
       getGithubRepos: function () {
         var def = $q.defer();

@@ -1,12 +1,16 @@
 'use strict';
 
 angular.module('bumper')
-  .controller('DashboardCtrl', function (bumperRepos) {
+  .controller('DashboardCtrl', function (Repo) {
 
     var vm = this;
 
     angular.extend(vm, {
-      repos: bumperRepos
+
+    });
+
+    Repo.getBumperRepos().then(function (repos) {
+      vm.repos = repos;
     });
 
   });

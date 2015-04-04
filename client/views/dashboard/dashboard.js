@@ -7,11 +7,6 @@ angular.module('bumper')
         templateUrl: 'views/dashboard/dashboard.html',
         controller: 'DashboardCtrl',
         controllerAs: 'vm',
-        authenticate: true,
-        resolve: {
-          bumperRepos: function (Repo) {
-            return Repo.getBumperRepos();
-          }
-        }
+        authenticate: true
       });
   });

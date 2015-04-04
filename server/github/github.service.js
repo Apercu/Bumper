@@ -3,7 +3,6 @@
 var GitHubApi = require('github');
 var async = require('async');
 var q = require('q');
-var Repo = require('../api/repo/repo.model.js');
 
 var github = {
 

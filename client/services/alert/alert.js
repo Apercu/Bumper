@@ -10,10 +10,11 @@ angular.module('bumper')
       /**
        * Create a new alert
        *
-       * @param msg
+       * @param msg {String}
+       * @param type {String} ['warning', 'error', 'default']
        */
-      addAlert: function (msg) {
-        _alerts.push({ msg: msg });
+      add: function (msg, type) {
+        _alerts.push({ msg: msg, type: type || 'default' });
       },
 
       /**
@@ -21,7 +22,7 @@ angular.module('bumper')
        *
        * @returns {Array}
        */
-      getAlerts: function () {
+      get: function () {
         return _alerts;
       }
 

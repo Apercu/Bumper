@@ -4,8 +4,8 @@
 
     <div class="notifs-container">
 
-      <div ng-repeat="notif in notifs" class="flash flash-with-icon">
-        <i class="octicon octicon-alert"></i>
+      <div ng-repeat="notif in notifs" class="flash flash-with-icon {{ flashClass[notif.type] }}">
+        <i class="octicon {{ iconClass[notif.type] }}"></i>
         {{ notif.msg }}
       </div>
 

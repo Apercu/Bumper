@@ -42,7 +42,7 @@ var auth = {
   setTokenCookie: function (req, res) {
     var token = auth.signToken(req.user._id);
     res.cookie('token', JSON.stringify(token));
-    res.redirect('/');
+    res.redirect('/dashboard');
   }
 
 };

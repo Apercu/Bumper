@@ -9,11 +9,11 @@ var router = express.Router();
 router
   .get('/', passport.authenticate('github', {
     session: false,
-    failure: '/login'
+    failure: '/'
   }))
   .get('/callback', passport.authenticate('github', {
     session: false,
-    failureRedirect: '/login'
+    failureRedirect: '/'
   }), auth.setTokenCookie);
 
 module.exports = router;

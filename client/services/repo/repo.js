@@ -6,8 +6,8 @@ angular.module('bumper')
     angular.extend(this, {
 
       /**
-       * Add a github repo to bumber
-       * Returns the newly created bumber repo
+       * Add a github repo to bumper
+       * Returns the newly created bumper repo
        *
        * @param githubRepo
        * @returns {Promise}

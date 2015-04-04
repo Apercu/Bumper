@@ -2,12 +2,26 @@
 
 var github = require('../../github/github.service');
 var Repo = require('./repo.model');
+var User = require('../user/user.model');
 var async = require('async');
 var david = require('david');
 
 function handleError (res, err) {
   return res.status(err.code || 500).send(err.message || err);
 }
+
+var updateGithubCacheQueue = async.queue(function (task, done) {
+  User.findById(task.userId, function (err, user) {
+    if (err) { return done(err); }
+    var repos = user.githubRepos;
+    var index = typeof task.repo === 'string' ? repos.map(function (r) { return String(r.bumperId); }).indexOf(task.repo) : repos.map(function (r) { return r.id; }).indexOf(task.repo.infos.id);
+    if (index === -1) { return done('Problem with db integrity.'); }
+    repos[index].addedToBumper = task.addedToBumper;
+    repos[index].bumperId = task.bumperId;
+    user.markModified('githubRepos');
+    user.save(done);
+  });
+});
 
 /**
  * Get list of Repos (temporary including ones from github)
@@ -65,13 +79,12 @@ exports.create = function (req, res) {
 
     // 5 - update user github repo list
     function (repo, done) {
-      var repos = req.user.githubRepos;
-      var index = repos.map(function (r) { return r.id; }).indexOf(repo.infos.id);
-      if (index === -1) { return done('Problem with db integrity.'); }
-      repos[index].addedToBumper = true;
-      repos[index].bumperId = repo._id;
-      req.user.markModified('githubRepos');
-      req.user.save(function (err) {
+      updateGithubCacheQueue.push({
+        userId: req.user._id,
+        repo: repo,
+        addedToBumper: true,
+        bumperId: repo._id
+      }, function (err) {
         if (err) { return done(err); }
         done(null, repo);
       });
@@ -99,13 +112,15 @@ exports.destroy = function (req, res) {
 
     // 2 - update user github repos cache
     function (done) {
-      var repos = req.user.githubRepos;
-      var index = repos.map(function (r) { return String(r.bumperId); }).indexOf(req.params.id);
-      if (index === -1) { return done('Problem with db integrity.'); }
-      repos[index].addedToBumper = false;
-      repos[index].bumperId = null;
-      req.user.markModified('githubRepos');
-      req.user.save(done);
+      updateGithubCacheQueue.push({
+        userId: req.user._id,
+        repo: req.params.id,
+        addedToBumber: false,
+        bumperId: null
+      }, function (err) {
+        if (err) { return done(err); }
+        done();
+      });
     }
 
   ], function (err) {

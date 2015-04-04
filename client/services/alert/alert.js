@@ -34,6 +34,33 @@ angular.module('bumper')
        */
       remove: function (alert) {
         _alerts.splice(_alerts.indexOf(alert), 1);
+      },
+
+      /**
+       * Create a new success alert
+       *
+       * @param msg
+       */
+      success: function (msg) {
+        this.add(msg, 'default');
+      },
+
+      /**
+       * Create a new warning alert
+       *
+       * @param msg
+       */
+      warning: function (msg) {
+        this.add(msg, 'warning');
+      },
+
+      /**
+       * Create a new error alert
+       *
+       * @param msg
+       */
+      error: function (msg) {
+        this.add(msg, 'error');
       }
 
     });

@@ -1,10 +1,6 @@
-notifs > .row > div {
-  position: relative;
-}
-
 .notifs-container {
-  position: absolute;
-  right: 0;
+  position: fixed;
+  right: 20px;
   z-index: 11;
   .notif {
     margin-bottom: 10px;

@@ -9,9 +9,6 @@ angular.module('bumper')
       $http.get('/api/users/me')
         .then(function (res) {
           _user = res.data;
-          if ($location.path() === '/') {
-            $location.path('/dashboard');
-          }
         })
         .catch(function (err) {
           console.log(err);

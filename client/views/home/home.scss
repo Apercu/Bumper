@@ -14,4 +14,19 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
+  > .home-content {
+    position: relative;
+    .overlay {
+      div {
+        display: flex;
+      }
+      h4 {
+        margin: 0;
+      }
+      i {
+        margin-top: -3px;
+        margin-right: 10px;
+      }
+    }
+  }
 }

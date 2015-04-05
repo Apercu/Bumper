@@ -9,31 +9,42 @@
 
   <hr>
 
-  <div class="row">
-    <div class="all-full centered main-login">
-      <button ng-click="vm.login()" ng-disabled="vm.authenticating" class="btn btn-primary">
+  <div class="home-content">
+
+    <div class="row">
+      <div class="all-full centered main-login">
+        <button ng-click="vm.login()" ng-disabled="vm.authenticating" class="btn btn-primary">
         <span ng-if="vm.authenticating">
           <i class="octicon octicon-sync sync-animate"></i> Authenticating...
         </span>
         <span ng-if="!vm.authenticating">
           <i class="octicon octicon-mark-github"></i> Login through github
         </span>
-      </button>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="all-full desktop-half centered">
-
-      <div class="blankslate">
-        <span class="mega-octicon octicon-repo-push"></span>
-        <span class="mega-octicon octicon-key"></span>
-        <h3>Authentification required to get started</h3>
-        <p>We're not bad guys, we will do nothing without your conscent.</p>
-        <p>You can browse the <a href="http://github.com/42Zavattas/Bumper">code here</a>, just to be sure.</p>
+        </button>
       </div>
-
     </div>
+
+    <div class="row">
+      <div class="all-full desktop-half centered">
+
+        <div class="blankslate">
+          <span class="mega-octicon octicon-repo-push"></span>
+          <span class="mega-octicon octicon-key"></span>
+          <h3>Authentification required to get started</h3>
+          <p>We're not bad guys, we will do nothing without your conscent.</p>
+          <p>You can browse the <a href="http://github.com/42Zavattas/Bumper">code here</a>, just to be sure.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div ng-show="vm.loading" class="overlay">
+      <div>
+        <i class="octicon octicon-sync sync-animate"></i>
+        <h4>Checking credentials...</h4>
+      </div>
+    </div>
+
   </div>
 
 </div>

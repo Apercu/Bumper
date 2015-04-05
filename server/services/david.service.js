@@ -50,8 +50,9 @@ exports.reduceDependencies = function (repo) {
     var status = {
       upToDate: 0,
       quasiUpToDate: 0,
-      outOfDate: [],
-      invalid: []
+      outOfDate: 0,
+      invalid: 0,
+      nb: deps.length
     };
     deps.forEach(function (dep) {
       try {
@@ -60,20 +61,12 @@ exports.reduceDependencies = function (repo) {
         var latest = semver.clean(dep.latest);
         var stable = semver.clean(dep.stable);
 
-        if (semver.gt(latest, required) && status < 3) {
-          ++status.quasiUpToDate;
-          return;
-        }
-
-        if (semver.gt(stable, required)) {
-          status.outOfDate.push(dep.name);
-          return;
-        }
-
+        if (semver.gt(latest, required) && status < 3) { return ++status.quasiUpToDate; }
+        if (semver.gt(stable, required)) { return ++status.outOfDate; }
         ++status.upToDate;
 
       } catch (e) {
-        status.invalid.push(dep.name);
+        ++status.invalid;
       }
     });
     return status;

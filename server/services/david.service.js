@@ -43,21 +43,38 @@ exports.reduceDependencies = function (repo) {
 
   if (!repo.david) { return; }
 
-  try {
-    repo.david.deps = reduce(repo.david.deps);
-  } catch (e) { repo.david.deps = 'invalid'; }
-  try {
-    repo.david.devDeps = reduce(repo.david.devDeps);
-  } catch (e) { repo.david.devDeps = 'invalid'; }
+  repo.david.deps = reduce(repo.david.deps);
+  repo.david.devDeps = reduce(repo.david.devDeps);
 
   function reduce (deps) {
-    var status = 1;
+    var status = {
+      upToDate: 0,
+      quasiUpToDate: 0,
+      outOfDate: [],
+      invalid: []
+    };
     deps.forEach(function (dep) {
-      var required = semver.clean(dep.required.charAt(0) === '^' ? dep.required.substr(1) : dep.required);
-      var latest = semver.clean(dep.latest);
-      var stable = semver.clean(dep.stable);
-      if (semver.gt(latest, required) && status < 3) { status = 2; }
-      if (semver.gt(stable, required)) { status = 3; }
+      try {
+
+        var required = semver.clean(dep.required.charAt(0) === '^' ? dep.required.substr(1) : dep.required);
+        var latest = semver.clean(dep.latest);
+        var stable = semver.clean(dep.stable);
+
+        if (semver.gt(latest, required) && status < 3) {
+          ++status.quasiUpToDate;
+          return;
+        }
+
+        if (semver.gt(stable, required)) {
+          status.outOfDate.push(dep.name);
+          return;
+        }
+
+        ++status.upToDate;
+
+      } catch (e) {
+        status.invalid.push(dep.name);
+      }
     });
     return status;
   }

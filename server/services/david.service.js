@@ -23,7 +23,7 @@ exports.retrieveDependencies = function (repo) {
 
     // get dev-dependencies
     function (done) {
-      david.getDependencies(pkg, {dev: true}, function (err, deps) {
+      david.getDependencies(pkg, { dev: true }, function (err, deps) {
         if (err) { return done(err); }
         repo.david.devDeps = listDependencies(deps);
         done();

@@ -1,27 +1,35 @@
 <div class="row">
   <div class="all-full">
 
-    <div ng-if="!vm.repos.length" class="flash flash-warn">
+    <div ng-if="!vm.loading && !vm.repos.length" class="flash flash-warn">
       You don't have any bumper repo activated, do you want to <a href="/add">add one</a> ?
     </div>
 
-    <div ng-repeat="repo in vm.repos">
+    <div class="main-list">
 
-      <h3>{{ repo.infos.name }}</h3>
-      <strong>name: </strong> {{ repo.infos.name }}<br/>
-      <strong>deps:</strong><br/>
-      <ul>
-        <li ng-repeat="dep in repo.david.deps">
-          {{ dep | json }}
-        </li>
-      </ul>
-      <strong>dev deps:</strong><br/>
-      <ul>
-        <li ng-repeat="dep in repo.david.devDeps">
-          {{ dep | json }}
-        </li>
-      </ul>
+      <div ng-repeat="repo in vm.repos" class="main-list--repo">
 
+        <h3>
+          <a ng-href="/b/{{ Auth.getUser().username }}/{{ repo.infos.name }}">/{{ Auth.getUser().username }}/{{ repo.infos.name }}</a>
+          <a ng-href="{{ repo.infos.url }}" target="_blank"><i class="octicon octicon-mark-github"></i></a>
+        </h3>
+        <p>
+          <em>{{ repo.infos.description }}</em>
+        </p>
+        <strong>deps:</strong><br/>
+        <ul>
+          <li ng-repeat="dep in repo.david.deps">
+            {{ dep | json }}
+          </li>
+        </ul>
+        <strong>dev deps:</strong><br/>
+        <ul>
+          <li ng-repeat="dep in repo.david.devDeps">
+            {{ dep | json }}
+          </li>
+        </ul>
+
+      </div>
 
     </div>
 

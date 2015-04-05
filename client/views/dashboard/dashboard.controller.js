@@ -6,11 +6,12 @@ angular.module('bumper')
     var vm = this;
 
     angular.extend(vm, {
-
+      loading: true
     });
 
     Repo.getBumperRepos().then(function (repos) {
       vm.repos = repos;
+      vm.loading = false;
     });
 
   });

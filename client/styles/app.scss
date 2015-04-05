@@ -30,6 +30,10 @@ body {
   }
 }
 
+.state-wait {
+  background-color: #cea61b;
+}
+
 .sync-animate {
   -webkit-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;

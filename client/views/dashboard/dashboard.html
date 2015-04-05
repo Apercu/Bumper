@@ -25,13 +25,13 @@
 
             <div class="row">
 
-              <span ng-if="repo.david.deps.invalid.length" class="state state-closed">
+              <span ng-if="repo.david.deps.invalid" class="state state-closed">
                 <i class="octicon octicon-alert"></i>
-                {{ repo.david.deps.invalid.length }} invalid
+                {{ repo.david.deps.invalid }} invalid
               </span>
-              <span ng-if="repo.david.deps.outOfDate.length" class="state state-closed">
+              <span ng-if="repo.david.deps.outOfDate" class="state state-closed">
                 <i class="octicon octicon-issue-opened"></i>
-                {{ repo.david.deps.outOfDate.length }} out-of-date
+                {{ repo.david.deps.outOfDate }} out-of-date
               </span>
               <span ng-if="repo.david.deps.quasiUpToDate" class="state state-wait">
                 <i class="octicon octicon-info"></i>
@@ -44,10 +44,7 @@
 
             </div>
 
-            <ul ng-if="repo.david.deps.outOfDate.length">
-              <li ng-repeat="dep in repo.david.deps.outOfDate">{{ dep }}</li>
-            </ul>
-            <span ng-if="!repo.david.deps.invalid.length && !repo.david.deps.outOfDate.length && !repo.david.deps.quasiUpToDate && !repo.david.deps.upToDate"
+            <span ng-if="!repo.david.deps.nb"
                   class="state state-open">
               <i class="octicon octicon-check"></i>
               no dependencies
@@ -60,13 +57,13 @@
 
             <div class="row">
 
-              <span ng-if="repo.david.devDeps.invalid.length" class="state state-closed">
+              <span ng-if="repo.david.devDeps.invalid" class="state state-closed">
                 <i class="octicon octicon-alert"></i>
-                {{ repo.david.devDeps.invalid.length }} invalid
+                {{ repo.david.devDeps.invalid }} invalid
               </span>
-              <span ng-if="repo.david.devDeps.outOfDate.length" class="state state-closed">
+              <span ng-if="repo.david.devDeps.outOfDate" class="state state-closed">
                 <i class="octicon octicon-issue-opened"></i>
-                {{ repo.david.devDeps.outOfDate.length }} out-of-date
+                {{ repo.david.devDeps.outOfDate }} out-of-date
               </span>
               <span ng-if="repo.david.devDeps.quasiUpToDate" class="state state-wait">
                 <i class="octicon octicon-info"></i>
@@ -79,11 +76,7 @@
 
             </div>
 
-            <ul ng-if="repo.david.devDeps.outOfDate.length">
-              <li ng-repeat="dep in repo.david.devDeps.outOfDate">{{ dep }}</li>
-            </ul>
-
-            <span ng-if="!repo.david.devDeps.invalid.length && !repo.david.devDeps.outOfDate.length && !repo.david.devDeps.quasiUpToDate && !repo.david.devDeps.upToDate"
+            <span ng-if="!repo.david.devDeps.nb"
                   class="state state-open">
               <i class="octicon octicon-check"></i>
               no dependencies

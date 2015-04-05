@@ -41,6 +41,8 @@ exports.retrieveDependencies = function (repo) {
 
 exports.reduceDependencies = function (repo) {
 
+  if (!repo.david) { return; }
+
   repo.david.deps = reduce(repo.david.deps);
   repo.david.devDeps = reduce(repo.david.devDeps);
 

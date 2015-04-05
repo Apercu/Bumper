@@ -13,11 +13,19 @@
           <a ng-href="/b/{{ Auth.getUser().username }}/{{ repo.infos.name }}">/{{ Auth.getUser().username }}/{{ repo.infos.name }}</a>
           <a ng-href="{{ repo.infos.url }}" target="_blank"><i class="octicon octicon-mark-github"></i></a>
         </h3>
+
         <p>
           <em>{{ repo.infos.description }}</em>
         </p>
-        <strong>deps: {{ repo.david.deps }}</strong><br/>
-        <strong>dev deps: {{ repo.david.devDeps }}</strong><br/>
+
+        <div class="row">
+          <ul class="all-half">
+            <li ng-repeat="dep in repo.david.deps.outOfDate">{{ dep }}</li>
+          </ul>
+          <ul class="all-half">
+            <li ng-repeat="dep in repo.david.devDeps.outOfDate">{{ dep }}</li>
+          </ul>
+        </div>
 
       </div>
 

@@ -1,10 +1,10 @@
 'use strict';
 
-var github = require('../../services/github.service');
 var Repo = require('./repo.model');
 var User = require('../user/user.model');
+var github = require('../../services/github.service');
+var david = require('../../services/david.service');
 var async = require('async');
-var david = require('david');
 
 function handleError (res, err) {
   return res.status(err.code || 500).send(err.message || err);
@@ -68,13 +68,14 @@ exports.create = function (req, res) {
 
     // 4 - update david deps
     function (repo, done) {
-      retrieveDependencies(repo, function (err) {
-        if (err) { return done(err); }
-        repo.save(function (err, repo) {
-          if (err) { return done(err); }
-          done(null, repo);
-        });
-      });
+      david.retrieveDependencies(repo)
+        .then(function () {
+          repo.save(function (err, repo) {
+            if (err) { return done(err); }
+            done(null, repo);
+          });
+        })
+        .catch(done);
     },
 
     // 5 - update user github repo list
@@ -128,44 +129,3 @@ exports.destroy = function (req, res) {
     res.status(200).end();
   });
 };
-
-function listDependencies (deps) {
-  var out = [];
-  Object.keys(deps).forEach(function (depName) {
-    out.push({
-      name: depName,
-      required: deps[depName].required || '*',
-      stable: deps[depName].stable || 'None',
-      latest: deps[depName].latest
-    });
-  });
-  return out;
-}
-
-function retrieveDependencies (repo, done) {
-
-  var pkg = JSON.parse(repo.pkg);
-
-  async.parallel([
-
-    // get dependencies
-    function (done) {
-      david.getDependencies(pkg, function (err, deps) {
-        if (err) { return done(err); }
-        repo.david.deps = listDependencies(deps);
-        done();
-      });
-    },
-
-    // get dev-dependencies
-    function (done) {
-      david.getDependencies(pkg, { dev: true }, function (err, deps) {
-        if (err) { return done(err); }
-        repo.david.devDeps = listDependencies(deps);
-        done();
-      });
-    }
-
-  ], done);
-
-}

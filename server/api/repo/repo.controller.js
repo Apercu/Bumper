@@ -2,8 +2,8 @@
 
 var Repo = require('./repo.model');
 var User = require('../user/user.model');
-var github = require('../../services/github.service');
-var david = require('../../services/david.service');
+var githubService = require('../../services/github.service');
+var davidService = require('../../services/david.service');
 var async = require('async');
 
 function handleError (res, err) {
@@ -32,7 +32,7 @@ var updateGithubCacheQueue = async.queue(function (task, done) {
 exports.index = function (req, res) {
   Repo.find({ user: req.user._id }).lean().exec(function (err, repos) {
     if (err) { return handleError(res, err); }
-    repos.map(david.reduceDependencies);
+    repos.map(davidService.reduceDependencies);
     res.status(200).json(repos);
   });
 };
@@ -52,7 +52,7 @@ exports.create = function (req, res) {
 
     // 2 - retrieve package.json
     function (done) {
-      github.getPackageDotJson(req.user, req.body)
+      githubService.getPackageDotJson(req.user, req.body)
         .then(function (pkg) { done(null, pkg); })
         .catch(function (err) { done(err); });
     },
@@ -69,7 +69,7 @@ exports.create = function (req, res) {
 
     // 4 - update david deps
     function (repo, done) {
-      david.retrieveDependencies(repo)
+      davidService.retrieveDependencies(repo)
         .then(function () {
           repo.save(function (err, repo) {
             if (err) { return done(err); }

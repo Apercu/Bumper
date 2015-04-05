@@ -41,7 +41,7 @@ angular.module('bumper', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, Alert) {
 
     $rootScope.Auth = Auth;
 
@@ -58,7 +58,12 @@ angular.module('bumper', [
     });
 
     $rootScope.$on('$routeChangeSuccess', function (e, route) {
-      $rootScope.rootUi.navBar = route.$$route.navBar === undefined;
+      $rootScope.rootUi.navBar = route.$$route && route.$$route.navBar !== false;
+    });
+
+    $rootScope.$on('$routeChangeError', function (event, current, previous, rejection) {
+      Alert.error(rejection.msg);
+      $location.path('/dashboard');
     });
 
   });

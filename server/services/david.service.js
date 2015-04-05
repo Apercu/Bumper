@@ -43,8 +43,12 @@ exports.reduceDependencies = function (repo) {
 
   if (!repo.david) { return; }
 
-  repo.david.deps = reduce(repo.david.deps);
-  repo.david.devDeps = reduce(repo.david.devDeps);
+  try {
+    repo.david.deps = reduce(repo.david.deps);
+  } catch (e) { repo.david.deps = 'invalid'; }
+  try {
+    repo.david.devDeps = reduce(repo.david.devDeps);
+  } catch (e) { repo.david.devDeps = 'invalid'; }
 
   function reduce (deps) {
     var status = 1;

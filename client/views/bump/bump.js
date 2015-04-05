@@ -9,18 +9,7 @@ angular.module('bumper')
         controllerAs: 'vm',
         authenticate: true,
         resolve: {
-          user: function ($location, $q, $route, Auth) {
-            var def = $q.defer();
-            Auth.getMe().then(function (user) {
-              if (user.username !== $route.current.params.user) {
-                def.reject({ msg: 'This is not your repo.' });
-              }
-              def.resolve(user);
-            }, function (err) {
-              def.reject(err);
-            });
-            return def.promise;
-          }
+          repo: function (Repo, $route) { return Repo.get($route.current.params.user, $route.current.params.repo); }
         }
       });
   });

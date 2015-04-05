@@ -130,3 +130,11 @@ exports.destroy = function (req, res) {
     res.status(200).end();
   });
 };
+
+exports.getOne = function (req, res) {
+  Repo.findOne({ 'infos.owner': req.params.owner, 'infos.name': req.params.repo }, '-pkg', function (err, repo) {
+    if (err) { return handleError(res, err); }
+    if (!repo) { return handleError(res, 'Not found'); }
+    res.status(200).json(repo);
+  });
+};

@@ -74,6 +74,14 @@ angular.module('bumper')
           .then(function () { def.resolve(); })
           .catch(function (err) { def.reject(err); });
         return def.promise;
+      },
+
+      get: function (owner, repo) {
+        var def = $q.defer();
+        $http.get('/api/repos/' + owner + '/' + repo)
+          .then(function (res) { def.resolve(res.data); })
+          .catch(function (err) { def.reject(err.data); });
+        return def.promise;
       }
 
     });

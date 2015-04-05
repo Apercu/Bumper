@@ -16,18 +16,8 @@
         <p>
           <em>{{ repo.infos.description }}</em>
         </p>
-        <strong>deps:</strong><br/>
-        <ul>
-          <li ng-repeat="dep in repo.david.deps">
-            {{ dep | json }}
-          </li>
-        </ul>
-        <strong>dev deps:</strong><br/>
-        <ul>
-          <li ng-repeat="dep in repo.david.devDeps">
-            {{ dep | json }}
-          </li>
-        </ul>
+        <strong>deps: {{ repo.david.deps }}</strong><br/>
+        <strong>dev deps: {{ repo.david.devDeps }}</strong><br/>
 
       </div>
 

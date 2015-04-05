@@ -62,7 +62,8 @@
     "passport": "^0.2.1",
     "passport-github": "^0.1.5",
     "passport-local": "^1.0.0",
-    "q": "^1.2.0"
+    "q": "^1.2.0",
+    "semver": "^4.3.3"
   },
   "scripts": {
     "start": "node server/server.js",

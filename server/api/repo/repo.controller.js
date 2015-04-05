@@ -32,6 +32,7 @@ var updateGithubCacheQueue = async.queue(function (task, done) {
 exports.index = function (req, res) {
   Repo.find({ user: req.user._id }).lean().exec(function (err, repos) {
     if (err) { return handleError(res, err); }
+    repos.map(david.reduceDependencies);
     res.status(200).json(repos);
   });
 };

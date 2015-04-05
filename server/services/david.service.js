@@ -3,6 +3,7 @@
 var q = require('q');
 var async = require('async');
 var david = require('david');
+var semver = require('semver');
 
 exports.retrieveDependencies = function (repo) {
 
@@ -35,6 +36,25 @@ exports.retrieveDependencies = function (repo) {
   });
 
   return def.promise;
+
+};
+
+exports.reduceDependencies = function (repo) {
+
+  repo.david.deps = reduce(repo.david.deps);
+  repo.david.devDeps = reduce(repo.david.devDeps);
+
+  function reduce (deps) {
+    var status = 1;
+    deps.forEach(function (dep) {
+      var required = semver.clean(dep.required.charAt(0) === '^' ? dep.required.substr(1) : dep.required);
+      var latest = semver.clean(dep.latest);
+      var stable = semver.clean(dep.stable);
+      if (semver.gt(latest, required) && status < 3) { status = 2; }
+      if (semver.gt(stable, required)) { status = 3; }
+    });
+    return status;
+  }
 
 };
 

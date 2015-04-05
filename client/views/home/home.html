@@ -11,8 +11,13 @@
 
   <div class="row">
     <div class="all-full centered main-login">
-      <button ng-click="vm.login()" ng-class="{ disabled: vm.authenticating }" class="btn btn-primary">
-        <i class="octicon octicon-mark-github"></i> {{ vm.authenticating ? 'Login...' : 'Login through github' }}
+      <button ng-click="vm.login()" ng-disabled="vm.authenticating" class="btn btn-primary">
+        <span ng-if="vm.authenticating">
+          <i class="octicon octicon-sync sync-animate"></i> Authenticating...
+        </span>
+        <span ng-if="!vm.authenticating">
+          <i class="octicon octicon-mark-github"></i> Login through github
+        </span>
       </button>
     </div>
   </div>

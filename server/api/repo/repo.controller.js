@@ -28,7 +28,7 @@ exports.create = function (req, res) {
 
     // 1 - check if repo not exists
     function (done) {
-      Repo.count({'infos.id': req.body.id}, function (err, count) {
+      Repo.count({ 'infos.id': req.body.id }, function (err, count) {
         if (err) { return handleError(res, err); }
         if (count) { return done('Repo already exists.'); }
         done();
@@ -86,7 +86,7 @@ exports.destroy = function (req, res) {
 
     // 1 - remove repo object
     function (done) {
-      Repo.findOne({_id: req.params.id}, function (err, repo) {
+      Repo.findOne({ _id: req.params.id }, function (err, repo) {
         if (err) { return handleError(res, err); }
         if (!repo) { return res.status(404).end(); }
         if (String(repo.user) !== String(req.user._id)) { return res.status(401).end(); }

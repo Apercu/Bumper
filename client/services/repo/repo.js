@@ -63,7 +63,7 @@ angular.module('bumper')
       },
 
       /**
-       * Un-bumb a repo
+       * Un-bump a repo
        *
        * @param repo or repo id
        * @returns {Promise}
